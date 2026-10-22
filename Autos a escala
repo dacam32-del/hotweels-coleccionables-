@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrina de Coleccionables - Autos a Escala</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #ffb703;
+            --secondary-accent: #fb8500;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #023047, #219ebc);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid #444;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: bold;
+            border-color: var(--accent-color);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img-container {
+            width: 100%;
+            height: 200px;
+            background-color: #2b2b2b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .badge {
+            align-self: flex-start;
+            background-color: rgba(255, 183, 3, 0.15);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+            color: #fff;
+        }
+        .card-details {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .card-details p {
+            margin: 0.2rem 0;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4ade80;
+            margin-bottom: 1rem;
+        }
+        .buy-btn {
+            background-color: #25d366;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-weight: bold;
+            display: block;
+            transition: background 0.2s;
+        }
+        .buy-btn:hover {
+            background-color: #1ebe5d;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Colección de Autos a Escala</h1>
+        <p>Piezas únicas de colección: Hot Wheels, Matchbox, Maisto y más.</p>
+    </header>
+
+    <div class="container">
+        <!-- Filtros -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterSelection('all')">Todos</button>
+            <button class="filter-btn" onclick="filterSelection('matchbox')">Matchbox</button>
+            <button class="filter-btn" onclick="filterSelection('hotwheels')">Hot Wheels</button>
+            <button class="filter-btn" onclick="filterSelection('maisto')">Maisto</button>
+            <button class="filter-btn" onclick="filterSelection('corgi')">Corgi</button>
+        </div>
+
+        <!-- Galería de Autos -->
+        <div class="grid" id="car-grid">
+
+            <!-- Auto 1 -->
+            <div class="card" data-category="matchbox">
+                <div class="card-img-container">
+                    <img src="images/porsche910.jpg" alt="Matchbox Porsche 910" onerror="this.src='https://via.placeholder.com/300x200?text=Matchbox+Porsche+910'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">MATCHBOX VINTAGE</span>
+                    <h3 class="card-title">Porsche 910 (No. 68)</h3>
+                    <div class="card-details">
+                        <p><strong>Año:</strong> 1970 (Lesney)</p>
+                        <p><strong>Procedencia:</strong> Inglaterra</p>
+                        <p><strong>Material:</strong> Metal / Base metálica</p>
+                    </div>
+                    <div class="price">$12.000 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20el%20Porsche%20910%20Matchbox%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Auto 2 -->
+            <div class="card" data-category="hotwheels">
+                <div class="card-img-container">
+                    <img src="images/hondacity.jpg" alt="Hot Wheels Honda City Turbo" onerror="this.src='https://via.placeholder.com/300x200?text=Honda+City+Turbo'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">HOT WHEELS JDM</span>
+                    <h3 class="card-title">Honda City Turbo (#5)</h3>
+                    <div class="card-details">
+                        <p><strong>Serie:</strong> HW GRFX</p>
+                        <p><strong>Procedencia:</strong> Malasia</p>
+                        <p><strong>Material:</strong> Metal / Base plástico</p>
+                    </div>
+                    <div class="price">$4.500 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20el%20Honda%20City%20Turbo%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Auto 3 -->
+            <div class="card" data-category="matchbox">
+                <div class="card-img-container">
+                    <img src="images/rescue.jpg" alt="Matchbox Rescue" onerror="this.src='https://via.placeholder.com/300x200?text=Matchbox+Super+GT+Rescue'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">MATCHBOX RESCUE</span>
+                    <h3 class="card-title">Super G.T. Rescue</h3>
+                    <div class="card-details">
+                        <p><strong>Año:</strong> 1985</p>
+                        <p><strong>Procedencia:</strong> China</p>
+                        <p><strong>Material:</strong> Metal y plástico</p>
+                    </div>
+                    <div class="price">$5.500 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20el%20Matchbox%20Rescue%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Auto 4 -->
+            <div class="card" data-category="corgi">
+                <div class="card-img-container">
+                    <img src="images/austinmetro.jpg" alt="Corgi Austin Metro" onerror="this.src='https://via.placeholder.com/300x200?text=Corgi+Austin+Metro'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">CORGI CLASSIC</span>
+                    <h3 class="card-title">Austin Metro</h3>
+                    <div class="card-details">
+                        <p><strong>Procedencia:</strong> Gran Bretaña</p>
+                        <p><strong>Interior:</strong> Beige original</p>
+                        <p><strong>Material:</strong> Metal / Base plástica</p>
+                    </div>
+                    <div class="price">$7.000 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20el%20Austin%20Metro%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Auto 5 -->
+            <div class="card" data-category="hotwheels">
+                <div class="card-img-container">
+                    <img src="images/landrover.jpg" alt="Hot Wheels Land Rover" onerror="this.src='https://via.placeholder.com/300x200?text=Land+Rover+Pickup'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">HOT WHEELS TRUCK</span>
+                    <h3 class="card-title">Land Rover Series III</h3>
+                    <div class="card-details">
+                        <p><strong>Año Matriz:</strong> 2018</p>
+                        <p><strong>Procedencia:</strong> Malasia</p>
+                        <p><strong>Material:</strong> Metal / Ruedas Off-road</p>
+                    </div>
+                    <div class="price">$3.500 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20el%20Land%20Rover%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Auto 6 -->
+            <div class="card" data-category="maisto">
+                <div class="card-img-container">
+                    <img src="images/colorado.jpg" alt="Maisto Chevrolet Colorado" onerror="this.src='https://via.placeholder.com/300x200?text=Chevrolet+Colorado'">
+                </div>
+                <div class="card-content">
+                    <span class="badge">MAISTO ESCALA</span>
+                    <h3 class="card-title">2018 Chevrolet Colorado</h3>
+                    <div class="card-details">
+                        <p><strong>Año Matriz:</strong> 2018</p>
+                        <p><strong>Procedencia:</strong> China</p>
+                        <p><strong>Material:</strong> Metal y chasis detallado</p>
+                    </div>
+                    <div class="price">$3.000 CLP</div>
+                    <a href="https://wa.me/?text=Hola,%20estoy%20interesado%20en%20la%20Chevrolet%20Colorado%20de%20tu%20vitrina." class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Colección de Autos a Escala. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function filterSelection(category) {
+            let cards = document.getElementsByClassName('card');
+            let buttons = document.getElementsByClassName('filter-btn');
+            
+            for (let btn of buttons) {
+                btn.classList.remove('active');
+            }
+            event.target.classList.add('active');
+
+            for (let card of cards) {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
